@@ -19,7 +19,7 @@ var randomNotes = []string{
 	`I'll circle back the senior XML RSS feed, that should Internet Explorer the AWS language!`,
 }
 
-func TestMemoizer(t *testing.T) {
+func TestPrivnote(t *testing.T) {
 	t.Log("Testing go-privnote...")
 
 	noteData := randomNotes[rand.Intn(len(randomNotes))]
