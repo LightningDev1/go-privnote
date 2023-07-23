@@ -138,7 +138,7 @@ func (c *Client) ReadNoteFromLink(noteLink string) (string, error) {
 		// The response is not valid JSON.
 		// This is usually because the note has been destroyed or does not exist,
 		// so return ErrInvalidNote.
-		return "", errors.Join(err, ErrInvalidNote)
+		return "", fmt.Errorf("%w: %s", ErrInvalidNote, err)
 	}
 
 	// Decrypt the note data.
@@ -149,14 +149,14 @@ func (c *Client) ReadNoteFromLink(noteLink string) (string, error) {
 		// The ciphertext is invalid. This is usually caused by the note data
 		// being invalid, so return ErrInvalidNote.
 		if errors.Is(err, util.ErrInvalidCipherText) {
-			return "", errors.Join(err, ErrInvalidNote)
+			return "", fmt.Errorf("%w: %s", ErrInvalidNote, err)
 		}
 
 		// The padding is invalid. This is usually caused by decrypting the note
 		// with an incorrect password, which causes the plaintext to be invalid,
 		// thus having invalid padding.
 		if errors.Is(err, util.ErrInvalidPadding) {
-			return "", errors.Join(err, ErrInvalidPassword)
+			return "", fmt.Errorf("%w: %s", ErrInvalidPassword, err)
 		}
 
 		return "", err

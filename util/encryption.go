@@ -7,6 +7,7 @@ import (
 	"crypto/md5"
 	"encoding/base64"
 	"errors"
+	"fmt"
 )
 
 // The following code replicates https://github.com/mdp/gibberish-aes, which is used by Privnote.
@@ -109,7 +110,7 @@ func Decrypt(encodedData, password string) (string, error) {
 	cipherText, err := base64.StdEncoding.DecodeString(encodedData)
 	if err != nil {
 		// The ciphertext is not valid Base64.
-		return "", errors.Join(err, ErrInvalidCipherText)
+		return "", fmt.Errorf("%w: %s", ErrInvalidCipherText, err)
 	}
 
 	// Check if the ciphertext is valid.
