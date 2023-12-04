@@ -2,6 +2,7 @@ package privnote
 
 import (
 	http "github.com/bogdanfinn/fhttp"
+	"github.com/bogdanfinn/tls-client/profiles"
 
 	tls_client "github.com/bogdanfinn/tls-client"
 )
@@ -16,14 +17,14 @@ var Headers = http.Header{
 	"sec-fetch-dest":   {"empty"},
 	"sec-fetch-mode":   {"cors"},
 	"sec-fetch-site":   {"same-origin"},
-	"user-agent":       {"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.5563.147 Safari/537.36"},
+	"user-agent":       {"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"},
 	"x-requested-with": {"XMLHttpRequest"},
 }
 
 // TLSClientOptions are the default TLS client options used by the Privnote client.
 var TLSClientOptions = []tls_client.HttpClientOption{
 	tls_client.WithTimeoutSeconds(20),
-	tls_client.WithClientProfile(tls_client.Chrome_111),
+	tls_client.WithClientProfile(profiles.Chrome_117),
 	tls_client.WithCookieJar(tls_client.NewCookieJar()),
 	tls_client.WithRandomTLSExtensionOrder(),
 }
